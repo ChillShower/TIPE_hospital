@@ -1,14 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
 class arbre :
     valeur = None
     G = None
@@ -20,20 +9,35 @@ class arbre :
         self.G = aG
         self.D = aD
 
-    def ajouter_fils (self , a cote):
-        if cote == "G" :
-            self.G = a
-        elif cote == "D"
-            self.D = a
+    def ajouter_fils_g (self , a ):
+        self.g = a
+
+    def ajouter_fils_d (self , a ) :
+        self.d = a
 
 
 Op = """liste avec temps opération croissant"""
 S ="""liste avec le temps des salles"""
 
+arbre = arbre(S[0])
+
 def remplir_arbre (Op , S):
-    ajouter_fils (S[0])
+    init( S[0] )
     for i in Op :
-        while
+        if Op[i] < S[0] :
+            arbre.ajouter_fils_g ("O"+str(i))
+            arbre.ajouter_fils_d ("nO"+str(i))
+            S[0] = S[0] - Op[i]
+        else :
+            arbre.ajouter_fils_d ("nO"+str(i))
+
+
+
+
+def remplir_arbre_rec (Op , S , arbre) :
+    if S[0] != 0 :
+        arbre.ajouter_fils_d ()
+
 
 
 
