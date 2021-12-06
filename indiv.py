@@ -19,7 +19,7 @@ un 0 signifie qu'elle n'est pas incluse
 class Individu:
 
     def __init__(self, salle, op):
-        self.bin = [[0] * len(op)] * len(salle)
+        self.bin = [[0 for i in range(len(op))] for i in range (len(salle))]
         self.value = 0
         self.liste_salle_value = salle
         self.liste_op_ban = []
@@ -40,6 +40,8 @@ class Individu:
         if not (L):
             self.bin[salle][op] = 0
             self.liste_op_ban.remove(op)
+        else:
+            self.bin[salle][op]=0
 
     def reprogramme_op(self, op, nvalue):
         self.liste_op_value[op] = nvalue
@@ -60,6 +62,7 @@ class Individu:
             self.feasable = self.feasable and (self.calculate_value_room(i) <= self.liste_salle_value[i])
 
     def set_value(self):
+        self.value = 0
         for i in range(len(self.liste_salle_value)):
             self.value += self.calculate_value_room(i)
 
@@ -71,6 +74,14 @@ class Individu:
         for i in self.liste_op_ban:
             L = L and i != op
         return L
-
-A=Individu([1,2,3,4,5,6,7],[1,2,3,4,5,2,8])
-A.change_bin_1(2,3)
+"""
+salle= [1,2,3]
+op =[5,1,2,3,2,1]
+test_ind= Individu(salle,op)
+test_ind.change_bin_1(1,1)
+test_ind.change_bin_1(2,0)
+test_ind.feasability()
+print(test_ind.feasable)
+print(test_ind.bin)
+test_ind.set_value()
+print(test_ind.value)"""
