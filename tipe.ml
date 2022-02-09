@@ -34,3 +34,16 @@ let op = [3;1;1];;
 
 remplir s op ;;
 
+type 'a arbre2  = 
+  |Feuille of 'a
+  |Noeud of 'a * ('a arbre2) list
+;; 
+
+let rec remplir2 a s op = match op with 
+  |[] -> Feuille(0)
+  |t::q -> Noeud (a, fonction t s q)
+and
+  let fonction t s q = match s with
+    |[] -> remplir2 t s q
+    |l::m -> remplir2  
+
