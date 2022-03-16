@@ -1,3 +1,4 @@
+
 class Arbre:
     """ Implémentation des Arbres binaires ( D = droite; G = gauche)"""
 
@@ -18,35 +19,26 @@ class Arbre:
 
 
 
-S = [2,5]
-O = [3,2]
+Salle = [2,5,4,3,8,6,10,6,20,1,3]
+O = [3,2,2,5,4,5,3,7,2,1]
 B=Arbre(0,[],[])
 A= Arbre(0,[],[])
 A.ajouterFils(B)
 
-##
-def rec_test(n):
-    a=n
-    for i in range( n):
-        a += rec_test(i)
-    return a
 
-print(rec_test(4))
 
-##
+
 def construit_arbre (salle , op, t, path) :
     A = Arbre(t,[],[])
     A.set_path(path)
+    S = salle.copy()
     if op != [] :
         for i in range(len(salle)) :
-            print(i)
             if salle[i] >= op[0] :#opération rentre
                 a=t
-                S = salle.copy()
                 S[i] -= op[0]
                 p= path.copy()
                 p.append(i)
-                print(p)
                 A.ajouterFils(construit_arbre(S , op[1:] ,(a+op[0]), p))
         p=path.copy()
         p.append("vide")
@@ -54,10 +46,10 @@ def construit_arbre (salle , op, t, path) :
     return(A)
 
 
-A=construit_arbre(S,O,0,[])
+A=construit_arbre(Salle,O,0,[])
 
 
-def print_arbre(a) :
+"""def print_arbre(a) :
     print("(", end="")
     print(a.val,end="")
     print("[",end="")
@@ -67,8 +59,28 @@ def print_arbre(a) :
     print("]",end="")
     print(")",end="")
 
-print_arbre(A)
+print_arbre(A)"""
 
 
+
+
+def best (A , m , path_m) :
+    fils = A.fils
+    l = [] 
+    if fils == [] : 
+        if m > A.val : 
+            return (m,path_m)
+        else :
+            return(A.val,A.path)
+    else : 
+        for i in fils : 
+            l.append(best(i, m, path_m))
+    L = [l[j][0] for j in range (len(l))]
+    M = max (L)
+    indice = L.index(M)
+    return(M , l[indice][1])
+    
+    
+print(best (A,0,[]))
 
 
